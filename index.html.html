@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GenMatch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f2f0;--panel:#fff;--ink:#2e1a1c;--mute:#7f6769;--line:#eadedc;--acc:#a8323e;--on-acc:#fff;--like:#a8323e;--soft:#f9ecea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171011;--panel:#221819;--ink:#f6ecec;--mute:#bfa3a5;--line:#3a2a2c;--acc:#e0707c;--on-acc:#2a0d10;--like:#e0707c;--soft:#33201f}}
+:root[data-theme="dark"]{--bg:#171011;--panel:#221819;--ink:#f6ecec;--mute:#bfa3a5;--line:#3a2a2c;--acc:#e0707c;--on-acc:#2a0d10;--like:#e0707c;--soft:#33201f}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 15px/1.45 "Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center}
+.phone{position:relative;width:min(400px,100%);height:min(780px,100%);background:var(--panel);display:flex;flex-direction:column;overflow:hidden}
+@media(min-width:520px){.phone{border-radius:28px;border:1px solid var(--line)}}
+header{padding:14px 18px 10px;border-bottom:1px solid var(--line)}
+.brand{font-weight:700;font-size:19px;letter-spacing:-.2px}.brand i{font-style:normal;color:var(--acc)}
+.sub{font-size:12px;color:var(--mute)}
+.xi{float:right;color:var(--acc);font-weight:400}
+main{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column}
+.view{flex:1;display:flex;flex-direction:column}
+nav{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
+nav button{background:none;border:0;border-top:2px solid transparent;padding:8px 2px 10px;font:inherit;font-size:12px;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button .n{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:11px}
+nav button.on{color:var(--acc);font-weight:700;border-top-color:var(--acc)}
+nav button.on .n{background:var(--acc);color:var(--on-acc);border-color:var(--acc)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+h2{font-size:22px;line-height:1.2;margin:0 0 4px}h3{font-size:16px;margin:0 0 6px}
+.mute{color:var(--mute)}.small{font-size:13px}
+.btn{width:100%;padding:13px;border-radius:12px;border:0;background:var(--acc);color:var(--on-acc);font:700 15px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer}
+.btn:disabled{opacity:.4;cursor:not-allowed}.btn.ghost{background:var(--soft);color:var(--acc);margin-top:8px}
+.bottom{margin-top:auto;padding-top:16px}
+.field{display:block;margin-top:14px}.field span{display:block;font-size:13px;color:var(--mute);margin-bottom:4px}
+input[type=text]{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--ink);font:inherit}
+.drop{margin-top:16px;width:100%;border:1.5px dashed var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;background:none;color:var(--ink);font:inherit}
+.drop.ok{border-style:solid;border-color:var(--acc);background:var(--soft)}
+.check{display:flex;gap:10px;margin-top:16px;font-size:13px;align-items:flex-start}.check input{margin-top:3px;accent-color:var(--acc)}
+.avatar{width:var(--s,48px);height:var(--s,48px);font-size:calc(var(--s,48px)*.4);border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;background:linear-gradient(140deg,hsl(var(--h) 42% 56%),hsl(calc(var(--h) + 14) 42% 38%))}
+.ring{width:var(--r,64px);height:var(--r,64px);border-radius:50%;background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;flex:none;position:relative}
+.ring::before{content:"";position:absolute;inset:calc(var(--r,64px)*.09);border-radius:50%;background:var(--panel)}
+.ring b{position:relative;font-size:calc(var(--r,64px)*.27)}
+.row{display:flex;gap:12px;align-items:center;width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.row .t{flex:1;min-width:0}.row .t b{display:block}
+.sec{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:13px;color:var(--mute)}.kv b{font-weight:500;color:var(--ink);text-align:right}
+.gene{display:flex;gap:14px;align-items:center;background:var(--soft);border-radius:16px;padding:14px;margin-top:18px}
+.deck{text-align:center}
+.card{border:1px solid var(--line);border-radius:22px;padding:22px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .28s,opacity .28s}
+.card.l{transform:translateX(-120%) rotate(-12deg);opacity:0}.card.r{transform:translateX(120%) rotate(12deg);opacity:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}.chip{padding:4px 10px;border-radius:99px;background:var(--soft);font-size:12px;color:var(--mute)}
+.actions{display:flex;gap:28px;justify-content:center;margin-top:20px}
+.round{width:60px;height:60px;border-radius:50%;border:1.5px solid var(--line);background:var(--panel);font-size:24px;cursor:pointer;color:var(--mute)}
+.round.like{background:var(--like);border-color:var(--like);color:#fff}
+.ov{position:absolute;inset:0;background:rgba(30,14,16,.8);display:grid;place-items:center;padding:24px}
+.box{background:var(--panel);border-radius:22px;padding:24px 20px;text-align:center;width:100%}
+.pair{display:flex;justify-content:center;gap:-8px;margin:14px 0}.pair .avatar{border:3px solid var(--panel)}.pair .avatar+.avatar{margin-left:-14px}
+.msgs{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:12px 0}
+.m{max-width:78%;padding:9px 12px;border-radius:16px;background:var(--soft)}.m.me{align-self:flex-end;background:var(--acc);color:var(--on-acc)}
+.send{display:flex;gap:8px;padding-top:10px}.send input{flex:1}.send .btn{width:auto;padding:0 18px}
+@media(prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <header><div class="brand">Gen<i>Match</i><span class="xi" aria-hidden="true">囍</span></div></header>
+  <main id="main"></main>
+  <nav id="nav"></nav>
+</div>
+<script>
+const P=[
+{n:'Trần Thu Hà',a:25,g:96,edu:'Thạc sĩ Kinh tế',fam:'Gia đình trí thức',look:5,h:352},
+{n:'Lê Hải Đăng',a:28,g:94,edu:'Đại học Y',fam:'Gia đình kinh doanh',look:4,h:6},
+{n:'Phạm Phương Linh',a:26,g:93,edu:'Đại học Ngoại thương',fam:'Gia đình công chức',look:4,h:14},
+{n:'Vũ Quốc Bảo',a:27,g:91,edu:'Kỹ sư Bách khoa',fam:'Gia đình giáo viên',look:3,h:340}
+];
+const T=['Đăng ký','Hồ sơ','Gợi ý','Quẹt','Chat'];
+const s={info:{job:'',edu:'',fam:''},step:1,file:false,ok:false,i:0,cur:null,msgs:[],replied:false};
+const $=id=>document.getElementById(id);
+const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const av=(p,z)=>`<div class="avatar" style="--h:${p.h};--s:${z}px">${p.n.split(' ').pop()[0]}</div>`;
+const ring=(g,r)=>`<div class="ring" style="--p:${g};--r:${r}px"><b>${g}%</b></div>`;
+const stars=n=>'★'.repeat(n)+'☆'.repeat(5-n);
+const me={n:'Nguyễn Minh Khôi',h:356};
+
+function view(){
+  if(s.step===1) return `<div class="view"><h2>Tạo tài khoản</h2><p class="mute small" style="margin:0">Tải báo cáo gen để hệ thống tìm người tương thích.</p>
+  <label class="field"><span>Họ và tên</span><input type="text" value="Nguyễn Minh Khôi"></label>
+  <label class="field"><span>Ngày sinh</span><input type="text" value="12/05/2000"></label>
+  <button class="drop ${s.file?'ok':''}" data-a="up">${s.file?'Đã tải GenReport_2026.pdf':'Chạm để tải báo cáo xét nghiệm gen (PDF)'}</button>
+  <label class="check"><input type="checkbox" data-a="ck" ${s.ok?'checked':''}><span>Tôi đồng ý chia sẻ dữ liệu gen cho thuật toán AI đối chiếu với người dùng khác.</span></label>
+  <div class="bottom"><button class="btn" data-a="s2" ${s.file&&s.ok?'':'disabled'}>Tạo tài khoản</button></div></div>`;
+  if(s.step===2) return `<div class="view"><div style="display:flex;gap:14px;align-items:center">${av(me,64)}<div><h2>Nguyễn Minh Khôi</h2><span class="mute small">26 tuổi</span></div></div>
+  <div class="gene"><div style="flex:1"><h3>Hồ sơ gen</h3><div class="small mute">Đã xác thực từ GenReport_2026.pdf. Đủ điều kiện nhận gợi ý ghép đôi.</div></div></div>
+  <div class="sec"><h3>Thông tin bổ sung</h3>
+  <label class="field"><span>Nghề nghiệp</span><input type="text" data-f="job" value="${esc(s.info.job)}" placeholder="Ví dụ: kỹ sư phần mềm"></label>
+  <label class="field"><span>Học vấn</span><input type="text" data-f="edu" value="${esc(s.info.edu)}" placeholder="Ví dụ: đại học, thạc sĩ"></label>
+  <label class="field"><span>Gia thế</span><input type="text" data-f="fam" value="${esc(s.info.fam)}" placeholder="Ví dụ: gia đình công chức"></label></div>
+  <div class="bottom"><button class="btn" data-a="s3">Xem gợi ý ghép đôi</button></div></div>`;
+  if(s.step===3) return `<div class="view"><h2>Gợi ý cho bạn</h2><p class="mute small" style="margin:0 0 8px">Chỉ hiện người có độ tương thích gen từ 90% trở lên.</p>
+  ${P.map((p,k)=>`<button class="row" data-a="pick" data-k="${k}">${av(p,44)}<span class="t"><b>${p.n}, ${p.a}</b><span class="small mute">${p.edu}</span></span>${ring(p.g,58)}</button>`).join('')}</div>`;
+  if(s.step===4){
+    const p=P[s.i];
+    if(!p) return `<div class="view" style="justify-content:center;text-align:center"><h2>Hết gợi ý hôm nay</h2><p class="mute small">Quay lại sau khi có thêm người đạt ngưỡng 90%.</p><button class="btn ghost" data-a="again">Xem lại từ đầu</button></div>`;
+    return `<div class="view deck"><div class="card" id="card">${av(p,72)}<h2 style="margin-top:6px">${p.n}, ${p.a}</h2>${ring(p.g,128)}<div class="small mute">độ tương thích gen</div>
+    <div class="chips"><span class="chip">${p.edu}</span><span class="chip">${p.fam}</span><span class="chip">Nhan sắc ${stars(p.look)}</span></div></div>
+    <p class="small mute" style="margin:14px 0 0">Mọi người ở đây đều đạt từ 90%. Hãy chọn theo học thức, gia thế và nhan sắc.</p>
+    <div class="actions"><button class="round" data-a="no" aria-label="Bỏ qua">✕</button><button class="round like" data-a="yes" aria-label="Thích">♥</button></div></div>`;
+  }
+  const p=s.cur;
+  return `<div class="view"><div style="display:flex;gap:10px;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--line)">${av(p,36)}<b style="flex:1">${p.n}</b><span class="small mute">Tương thích ${p.g}%</span></div>
+  <div class="msgs" id="msgs">${s.msgs.map(m=>`<div class="m ${m.me?'me':''}">${esc(m.t)}</div>`).join('')}</div>
+  <div class="send"><input type="text" id="msg" placeholder="Nhắn tin..." aria-label="Tin nhắn"><button class="btn" data-a="send">Gửi</button></div></div>`;
+}
+function draw(){
+  $('main').innerHTML=view();
+  $('nav').innerHTML=T.map((t,k)=>`<button class="${s.step===k+1?'on':''}" data-a="tab" data-k="${k+1}"><span class="n">${k+1}</span>${t}</button>`).join('');
+  const m=$('msgs'); if(m) m.scrollTop=m.scrollHeight;
+}
+function go(n){
+  if(n===5&&!s.cur) setCur(P[0]);
+  s.step=n; draw();
+}
+function setCur(p){
+  s.cur=p; s.replied=false;
+  s.msgs=[{t:`Chào bạn, hệ thống báo hai mình tương thích gen ${p.g}%. Bạn thấy sao?`,me:0}];
+}
+function match(p){
+  setCur(p);
+  const o=document.createElement('div'); o.className='ov'; o.id='ov';
+  o.innerHTML=`<div class="box"><h2>Hai bạn đã match</h2><div class="pair">${av(me,64)}${av(p,64)}</div><div class="small mute">Độ tương thích gen ${p.g}%</div>
+  <div style="margin-top:18px"><button class="btn" data-a="chat">Nhắn tin</button><button class="btn ghost" data-a="close">Tiếp tục quẹt</button></div></div>`;
+  $('phone').appendChild(o);
+}
+function swipe(dir){
+  const c=$('card'); if(!c) return;
+  const p=P[s.i]; c.classList.add(dir);
+  setTimeout(()=>{ s.i++; draw(); if(dir==='r') match(p); },280);
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-a]'); if(!t) return;
+  const a=t.dataset.a, k=+t.dataset.k;
+  if(a==='tab') go(k);
+  else if(a==='up'){s.file=true;draw();}
+  else if(a==='s2') go(2);
+  else if(a==='s3') go(3);
+  else if(a==='pick'){s.i=k;go(4);}
+  else if(a==='no') swipe('l');
+  else if(a==='yes') swipe('r');
+  else if(a==='again'){s.i=0;draw();}
+  else if(a==='close'){$('ov').remove();}
+  else if(a==='chat'){$('ov').remove();go(5);}
+  else if(a==='send') send();
+});
+document.addEventListener('change',e=>{ if(e.target.dataset.a==='ck'){s.ok=e.target.checked;draw();} });
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.id==='msg') send(); });
+document.addEventListener('input',e=>{ const f=e.target.dataset.f; if(f) s.info[f]=e.target.value; });
+function send(){
+  const i=$('msg'); const v=i.value.trim(); if(!v) return;
+  s.msgs.push({t:v,me:1}); draw(); $('msg').focus();
+  if(!s.replied){ s.replied=true; setTimeout(()=>{ s.msgs.push({t:'Nghe hợp đó. Cuối tuần này mình cà phê nhé?',me:0}); if(s.step===5){draw();} },900); }
+}
+draw();
+</script>
+</body>
+</html>
